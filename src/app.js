@@ -8,17 +8,16 @@ const bodyParser = require('./lib/parse-body');
 const app = http.createServer((req, res) => {
 
     if(req.method === "GET"){
-    fs.readFile('cowsay.html', (err, data) => {
         res.setHeader('Content-Type', 'text/html');
         res.statusCode = 200;
         res.statusMessage = 'OK';
         res.write(`<!DOCTYPE html> <html><body><h1>${req.url.query}</h1></body></html>`);
         res.end();
         return;
-    });
+    }
 
     else if(req.method === 'POST'){
-        boddParse.execute(req)
+        bodyParser.execute(req)
         .then((req) => {
             res.setHeader('Content-Type', 'text/html');
             res.statusCode = 200;
@@ -35,15 +34,7 @@ const app = http.createServer((req, res) => {
             res.write(JSON.stringify(errorObject));
             res.end();
             return;
-        }
-
-        res.setHeader('Content-Type', 'text/json');
-        res.statusCode = 200;
-        res.statusMessage = 'OK';
-        res.write(JSON.stringify(req.body));
-        res.end();
-        return;
-    })
+        });
     }
 });
 

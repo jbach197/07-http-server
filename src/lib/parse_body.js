@@ -1,6 +1,6 @@
 'use strict';
 
-const bodyParser = module.export = {};
+const bodyParser = module.exports = {};
 
 bodyParser.execute = (req) => {
 
@@ -13,7 +13,7 @@ bodyParser.execute = (req) => {
 
     req.on('end', () => {
         try{
-            request.body = JSON.parse(text);
+            req.body = JSON.parse(text);
             resolve(req);
         }
         catch(err) {
